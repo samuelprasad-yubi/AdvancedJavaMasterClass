@@ -62,25 +62,30 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+
+
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            //hey
             return ResponseEntity.badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            //hey
             return ResponseEntity.badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
+        //hey
         User user =
                 new User(
                         signUpRequest.getUsername(),
                         signUpRequest.getEmail(),
                         encoder.encode(signUpRequest.getPassword()));
 
-        if (signUpRequest.getRole() == null || signUpRequest.getRole().equalsIgnoreCase("user")) {
+        if (signUpRequest.getRole() == null || signUpRequest.getRole()) {
             user.setRole("ROLE_USER");
-        } else if (signUpRequest.getRole().equalsIgnoreCase("admin")) {
-            user.setRole("ROLE_ADMIN");
+        } else if (signUpRequest.getRole()) {
+            return   user.setRole("ROLE_ADMIN");
         } else {
             throw new RuntimeException("Role Not Found!");
         }
