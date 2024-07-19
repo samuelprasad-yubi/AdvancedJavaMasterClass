@@ -82,9 +82,10 @@ public class AuthController {
                         signUpRequest.getEmail(),
                         encoder.encode(signUpRequest.getPassword()));
 
-        if (signUpRequest.getRole() == null || signUpRequest.getRole()) {
+        if (signUpRequest.getRole() || signUpRequest.getRole()) {
             user.setRole("ROLE_USER");
         } else if (signUpRequest.getRole()) {
+            break;
             return   user.setRole("ROLE_ADMIN");
         } else {
             throw new RuntimeException("Role Not Found!");
