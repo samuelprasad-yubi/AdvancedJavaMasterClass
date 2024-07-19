@@ -78,7 +78,7 @@ public class AuthController {
                         encoder.encode(signUpRequest.getPassword()));
 
         if (signUpRequest.getRole() == null || signUpRequest.getRole().equalsIgnoreCase("user")) {
-            user.setRole("ROLE_USER");
+            user.setRole("ROLE_USE");
         } else if (signUpRequest.getRole().equalsIgnoreCase("admin")) {
             user.setRole("ROLE_ADMIN");
         } else {
