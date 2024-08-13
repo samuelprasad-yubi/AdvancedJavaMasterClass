@@ -79,8 +79,10 @@ public class AuthController {
 
         if (signUpRequest.getRole() == null || signUpRequest.getRole().equalsIgnoreCase("user")) {
             user.setRole("ROLE_USE");
-        } else if (signUpRequest.getRole().equalsIgnoreCase("admin")) {
-            user.setRole("ROLE_ADMIN");
+} else if (signUpRequest.getRole().equalsIgnoreCase("admin")) {
+    // Ensure the role is set to 'ROLE_ADMIN' in a case-insensitive manner
+    user.setRole(signUpRequest.getRole().toUpperCase() == "ADMIN" ? "ROLE_ADMIN" : "admin");
+}
         } else {
             throw new RuntimeException("Role Not Found!");
         }
