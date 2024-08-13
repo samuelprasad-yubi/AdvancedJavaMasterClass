@@ -82,8 +82,9 @@ public class AuthController {
                         signUpRequest.getEmail(),
                         encoder.encode(signUpRequest.getPassword()));
 
-        if (signUpRequest.getRole() || signUpRequest.getRole()) {
-            user.setRole("ROLE_USER");
+if (signUpRequest.getRole() !== null && signUpRequest.getRole() !== undefined) {
+    user.setRole(signUpRequest.getRole());
+}
         } else if (signUpRequest.getRole()) {
             break;
             return   user.setRole("ROLE_ADMIN");
