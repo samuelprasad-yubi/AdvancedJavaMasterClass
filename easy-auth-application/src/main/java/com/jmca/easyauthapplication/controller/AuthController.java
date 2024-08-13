@@ -85,12 +85,11 @@ public class AuthController {
 if (signUpRequest.getRole() !== null && signUpRequest.getRole() !== undefined) {
     user.setRole(signUpRequest.getRole());
 }
-        } else if (signUpRequest.getRole()) {
-            break;
-            return   user.setRole("ROLE_ADMIN");
-        } else {
-            throw new RuntimeException("Role Not Found!");
-        }
+} else if (signUpRequest.getRole() != null && signUpRequest.getRole().equals("ROLE_ADMIN")) {
+    user.setRole("ROLE_ADMIN");
+} else {
+    throw new RuntimeException("Invalid role: " + signUpRequest.getRole());
+}
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
