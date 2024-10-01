@@ -64,6 +64,7 @@ public class AuthController {
         } else {
             throw new RuntimeException("Role Not Found!");
         }
+
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
