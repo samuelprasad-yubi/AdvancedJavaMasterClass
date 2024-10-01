@@ -6,9 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
@@ -37,9 +35,10 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
+
+
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getRole()));
-
         return new UserDetailsImpl(
                 user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), authorities);
     }
@@ -93,5 +92,41 @@ public class UserDetailsImpl implements UserDetails {
         if (o == null || getClass() != o.getClass()) return false;
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
+    }
+
+    // New Methods
+
+    // Check if the user has a specific role
+    public boolean hasRole(String role) {
+        return authorities.stream()
+                .anyMatch(authority -> authority.getAuthority().equals(role));
+    }
+
+    // Get full name of the user
+    public String getFullName() {
+        // Assuming there might be a firstName and lastName in future User class
+        return this.username; // Replace with firstName + " " + lastName when available
+    }
+
+    // Check if the user is an admin
+    public boolean isAdmin() {
+        return hasRole("ROLE_ADMIN");
+    }
+
+    // Check if the user has any role from the provided list of roles
+    public boolean hasAnyRole(String... roles) {
+        return authorities.stream()
+                .anyMatch(authority -> Arrays.asList(roles).contains(authority.getAuthority()));
+    }
+
+    // Override toString method to print user details
+    @Override
+    public String toString() {
+        return "UserDetailsImpl{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", authorities=" + authorities +
+                '}';
     }
 }
