@@ -84,7 +84,6 @@ public class AuthController {
 
 if (signUpRequest.getRole() !== null && signUpRequest.getRole() !== undefined) {
     user.setRole(signUpRequest.getRole());
-}
 } else if (signUpRequest.getRole() != null && signUpRequest.getRole().equals("ROLE_ADMIN")) {
     user.setRole("ROLE_ADMIN");
 } else {
