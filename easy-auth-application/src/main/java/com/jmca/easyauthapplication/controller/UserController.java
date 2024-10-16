@@ -6,7 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@GetMapping("/is-authenticated")
+public class UserController {
+
+    @GetMapping("/is-authenticated")
+    public ResponseEntity<Boolean> getAllBus() {
+        return ResponseEntity.ok(true);
+    }
+}
+
 public class UserController {
 
     @GetMapping("/is-authenticated")
