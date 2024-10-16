@@ -11,6 +11,7 @@ public class UserController {
 
     @GetMapping("/is-authenticated")
     public ResponseEntity<Boolean> getAllBus() {
-        return ResponseEntity.ok(true);
+
+         ResponseEntity.ok(true);
     }
 }
